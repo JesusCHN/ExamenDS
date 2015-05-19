@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ExamenDSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Ciudad">
+    <Key>
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdCiudad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="Habitantes" Type="int" />
+    <Property Name="EstadioPrincipal" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Equipo">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NombreEquipo" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdTecnico" Type="int" />
+    <Property Name="FechaFundacion" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Tecnico">
+    <Key>
+      <PropertyRef Name="IdTecnico" />
+    </Key>
+    <Property Name="IdTecnico" Type="int" Nullable="false" />
+    <Property Name="nombre" Type="nvarchar" MaxLength="50" />
+    <Property Name="edad" Type="int" />
+    <Property Name="sexo" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Equipo_Tecnico">
+    <End Role="Tecnico" Type="Self.Tecnico" Multiplicity="0..1" />
+    <End Role="Equipo" Type="Self.Equipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tecnico">
+        <PropertyRef Name="IdTecnico" />
+      </Principal>
+      <Dependent Role="Equipo">
+        <PropertyRef Name="IdTecnico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ExamenDSModelStoreContainer">
+    <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipo" EntityType="Self.Equipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tecnico" EntityType="Self.Tecnico" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Equipo_Tecnico" Association="Self.FK_Equipo_Tecnico">
+      <End Role="Tecnico" EntitySet="Tecnico" />
+      <End Role="Equipo" EntitySet="Equipo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

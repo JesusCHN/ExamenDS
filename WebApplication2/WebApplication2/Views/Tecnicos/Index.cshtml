@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/app/controllers/TecnicoCtrl.js"></script>
+
+
+<div class="container" ng-app="appTecnicos" ng-controller="TecnicoCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped">
+                <tr>
+                    <th>IdTecnico</th>
+                    <th>NombreTecnico</th>
+                    <th>IdTecnico</th>
+                    <th>FechaFundacion</th>
+                </tr>
+
+                <tr ng-repeat="item in ListaTecnicos">
+                    <td> {{item.IdTecnico}}  </td>
+                    <td> {{item.nombre}} </td>
+                    <td> {{item.edad}} </td>
+                    <td> {{item.sexo}} </td>
+                    <td>
+                        <button type="button" ng-click="EditarTecnico(item)" class="btn-success">Editar</button>
+                        <button type="button" ng-click="EliminarTecnico(item)" class="btn-danger">Borrar</button>
+                    </td>
+                </tr>
+
+                <form name="form" class="css-form" novalidate>
+                    <tr ng-if="MostrarControles">
+                        <td>
+                            <input type="text" class="form-control" placeholder="Codigo" ng-model="Tecnico.IdTecnico" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Tecnico.Nombre" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Edad" ng-model="Tecnico.edad" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Sexo" ng-model="Tecnico.sexo" />
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+                </form>
+
+
+            </table>
+            <a ng-click="NuevoTecnico()" class="btn btn-primary">Agregar Tecnico</a>
+
+
+        </div>
+    </div>
+</div>

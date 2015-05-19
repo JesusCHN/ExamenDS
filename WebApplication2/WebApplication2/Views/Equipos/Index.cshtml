@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<script src="~/app/controllers/EquiposCtrl.js"></script>
+
+
+<div class="container" ng-app="appEquipos" ng-controller="EquiposCtrl">
+    <div class="row">
+        <div class="col-md-12">
+
+            <table class="table table-striped">
+                <tr>
+                    <th>IdEquipo</th>
+                    <th>NombreEquipo</th>
+                    <th>IdTecnico</th>
+                    <th>FechaFundacion</th>
+                </tr>
+
+                <tr ng-repeat="item in ListaEquipos">
+                    <td> {{item.IdEquipo}}  </td>
+                    <td> {{item.NombreEquipo}} </td>
+                    <td> {{item.IdTecnico}} </td>
+                    <td> {{item.FechaFundacion}} </td>
+                    <td>
+                        <button type="button" ng-click="EditarEquipo(item)" class="btn-success">Editar</button>
+                        <button type="button" ng-click="EliminarEquipo(item)" class="btn-danger">Borrar</button>
+                    </td>
+                </tr>
+
+                <form name="form" class="css-form" novalidate>
+                    <tr ng-if="MostrarControles">
+                        <td>
+                            <input type="text" class="form-control" placeholder="Codigo" ng-model="Equipo.IdEquipo" />
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Nombre" maxlength="10" name="txtNombre" ng-model="Equipo.NombreEquipo" />
+                        </td>
+                        
+                        <td> <select ng-model="Equipo.IdTecnico" ng-options="i.IdTecnico as i.nombre for i in ListaGetTecnicos"><option>Seleccione Tecnico </option></select></td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="FechaFundacion" ng-model="Equipo.FechaFundacion" />
+                        
+                        <td>
+                            <button type="button" class="btn btn-primary" ng-click="Guardar()">Aceptar</button>
+                            <button type="button" class="btn btn-default" ng-click="limpiar()">Cancelar</button>
+                        </td>
+                    </tr>
+                </form>
+
+
+            </table>
+            <a ng-click="NuevoEquipo()" class="btn btn-primary">Agregar Equipo</a>
+            
+
+        </div>
+    </div>
+</div>
